@@ -19,9 +19,7 @@ const shopController = require('./controllers/shop');
 const isAuth = require('./middleware/is-auth');
 const User = require('./models/user');
 
-const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${
-  process.env.MONGO_PASSWORD
-}@cluster0-ntrwp.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
+const MONGODB_URI = "mongodb+srv://admin:admin@cluster0.xdtso.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 const app = express();
 const store = new MongoDBStore({
@@ -137,7 +135,8 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(MONGODB_URI,{ useNewUrlParser: true, useUnifiedTopology: true },
+    )
   .then(result => {
     // https
     //   .createServer({ key: privateKey, cert: certificate }, app)
